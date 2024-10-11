@@ -1,0 +1,17 @@
+{
+  "name": "odin-book",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "backend": "npm run dev -w backend",
+    "frontend": "npm run dev -w frontend",
+    "start": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "author": "",
+  "license": "ISC",
+  "workspaces":["backend", "frontend"],
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
