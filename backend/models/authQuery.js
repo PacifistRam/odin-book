@@ -79,23 +79,71 @@ const getUserByUsername = async (userName) => {
 
 
 const getUserById = async (userId) => {
-    const user = await prisma.user.findUnique({
-        where :{
-            id: +userId
-        },
-        select:{
-            id: true,
-            userName: true,
-            email: true
-        },
-        include: {
-            profile: true
+    try {
+      const user = await prisma.user.findUnique({
+          where :{
+              id: +userId
+          },
+          select:{
+              id: true,
+              userName: true,
+              email: true
+          }
+  
+      })
+      if(user){
+        return {
+          data: user,
+          message: "user exists"
         }
-
-    })
+      }
+      else{
+        return{
+          data: null,
+          message: "no user found"
+        }
+      }
+    } catch (error) {
+      console.error(error)
+      return{
+        data: null,
+        message: "database error",
+        error: error.message
+      }
+    }
 }
 
 
+// create a new user
+const createUser = async ( email, userName, password ) => {
+  try {
+    const newUser = await prisma.user.create({
+      data: {
+        email,
+        userName,
+        password,
+      }
+    })
+    return{
+      data: newUser,
+      message: "user created successfully",
+      error: null
+    }
+  } catch (error) {
+    console.error(error)
+    return{
+      data: null,
+      message: "database error",
+      error: error.message
+    }
+  }
+}
+
+
+
+
 module.exports ={
-  getUserByEmail
+  getUserByEmail,
+  getUserById,
+  createUser
 }

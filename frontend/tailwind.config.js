@@ -1,12 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: ["class"],
+    darkMode: ["selector"],
     content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
   	extend: {
+		fontFamily:{
+			inter: ['Inter', 'sans-serif']
+		},
+		gridTemplateRows: {
+			mainLayout: 'auto 1fr auto'
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

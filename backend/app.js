@@ -10,6 +10,7 @@ const cors = require("cors")
 app.use(express.json())
 
 const authRouter = require("./routes/authRoutes")
+const postRouter = require("./routes/postRoutes")
 const testRouter = require("./routes/testRoutes")
 
 const PORT = process.env.PORT || 5000;
@@ -29,6 +30,7 @@ app.get("/", (req, res) => res.send("hello Odin-book"));
 
 
 app.use("/auth", authRouter)
+app.use("/api/post", postRouter)
 app.use("/test", testRouter)
 
 
