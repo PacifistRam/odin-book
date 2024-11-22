@@ -2,8 +2,11 @@ import {createBrowserRouter, RouterProvider, Link } from "react-router-dom"
 
 import MainLayout from "./layout/MainLayout"
 import Login from "./pages/Login"
-import UserHome from "./pages/UserHome"
+import UserHomeLayout from "./layout/UserHomeLayout"
 import SignUp from "./pages/SignUp"
+import Posts from "./pages/Posts"
+import CreatePost from "./pages/CreatePost"
+import Profile from "./pages/Profile"
 
 
 
@@ -18,7 +21,22 @@ const router = createBrowserRouter([
       },
       {
         path: "user-home",
-        element: <UserHome/>,
+        element: <UserHomeLayout/>,
+        children:[
+          {
+            index: true,
+            element: <Posts />
+          },
+          {
+            path: "create-post",
+            element: <CreatePost />
+          },
+          {
+            path: "user-profile",
+            element: <Profile />
+          },
+
+        ]
       },
       {
         path: "sign-up",

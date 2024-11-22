@@ -1,0 +1,77 @@
+----Backnav-----
+
+const handleClick = () => {
+  if (!customNav) {
+    if (window.history.state) navigate(-1);  // Go back one page in history
+  } else {
+    navigate(customNav);  // Navigate to a custom path if provided
+  }
+};
+
+
+----historyApi----
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const PostList = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const listContainerRef = useRef(null);
+  const navigate = useNavigate();
+
+  // Save scroll position on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (listContainerRef.current) {
+        setScrollPosition(listContainerRef.current.scrollTop);
+      }
+    };
+
+    const container = listContainerRef.current;
+    container.addEventListener('scroll', handleScroll);
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Restore scroll position when coming back
+  useEffect(() => {
+    if (listContainerRef.current && scrollPosition > 0) {
+      listContainerRef.current.scrollTop = scrollPosition;
+    }
+  }, [scrollPosition]);
+
+  const handleClick = (customNav) => {
+    if (!customNav) {
+      if (window.history.state) {
+        navigate(-1);  // Go back one page
+      }
+    } else {
+      navigate(customNav);  // Navigate to a custom path
+    }
+  };
+
+  return (
+    <div
+      className="post-list-container"
+      ref={listContainerRef}
+      style={{ height: '80vh', overflowY: 'auto' }}
+    >
+      {/* Render the list of posts */}
+      <ul>
+        {['Post 1', 'Post 2', 'Post 3'].map((post, index) => (
+          <li key={index}>
+            <button onClick={() => handleClick(`/post/${index + 1}`)}>
+              {post}
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {/* Render the Outlet to show the individual post */}
+      <Outlet />
+    </div>
+  );
+};
+
+export default PostList;
