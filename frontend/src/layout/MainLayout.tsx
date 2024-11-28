@@ -5,7 +5,7 @@ import { useState, useEffect, createContext } from "react";
 import { verifyToken } from "@/utils/apiCalls";
 
 type User = {
-  id: number | null;
+  id: number ;
   email: string;
   userName: string;
   profilePic: string;
@@ -25,7 +25,7 @@ export const AuthContext = createContext<{
   token: "",
   setToken: () => {},
   user: {
-    id: null,
+    id:0,
     email: "",
     userName: "",
     profilePic: "",
@@ -42,7 +42,7 @@ const MainLayout = () => {
     localStorage.getItem("token") || ""
   );
   const [user, setUser] = useState<User>({
-    id: null,
+    id: 0,
     email: "",
     userName: "",
     profilePic: "",
@@ -71,7 +71,7 @@ const MainLayout = () => {
           console.log("failed to authenticate");
           setUserError("verification failed");
           setUser({
-            id: null,
+            id: 0,
             email: "",
             userName: "",
             profilePic: "",
@@ -91,7 +91,7 @@ const MainLayout = () => {
 
   const handleLogOut = () => {
     setUser({
-      id: null,
+      id: 0,
       email: "",
       userName: "",
       profilePic: "",

@@ -75,3 +75,38 @@ const PostList = () => {
 };
 
 export default PostList;
+
+
+
+
+import React, { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+
+const PostPage = () => {
+  const commentsRef = useRef(null);
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    // Check the hash and scroll to the corresponding section
+    if (hash === '#comments' && commentsRef.current) {
+      commentsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [hash]);  // The effect runs every time the hash changes
+
+  return (
+    <div>
+      <div id="post-content">
+        {/* Post content */}
+        <p>This is a post content.</p>
+      </div>
+
+      <div id="comments" ref={commentsRef}>
+        {/* Comments section */}
+        <h2>Comments</h2>
+        <p>Here are some comments.</p>
+      </div>
+    </div>
+  );
+};
+
+export default PostPage;

@@ -21,7 +21,7 @@ export const postTimestamp = (timeStamp: TimeStamp) => {
   const differenceInDays = differenceInCalendarDays(currentDate, timeStamp);
   const differenceInHour = differenceInHours(currentDate, timeStamp);
   const differenceInMinute = differenceInMinutes(currentDate, timeStamp);
-  console.log("minute:",differenceInMinute)
+
   // Return corresponding time format string
   if (differenceInYears > 0) {
     return `${differenceInYears} year${differenceInYears > 1 ? "s" : ""} ago`;

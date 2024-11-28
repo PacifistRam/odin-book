@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp"
 import Posts from "./pages/Posts"
 import CreatePost from "./pages/CreatePost"
 import Profile from "./pages/Profile"
+import PostDetail from "./pages/PostDetail"
 
 
 
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
             path: "user-profile",
             element: <Profile />
           },
+          {
+            path: "post/:postId",
+            element: <PostDetail />
+          }
 
         ]
       },
